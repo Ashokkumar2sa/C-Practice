@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+
+struct node {
+    int x;
+    struct node *next;
+};
+void display(struct node* head){
+    while(head != NULL){
+        cout << head->x << endl;
+        head = head -> next;
+    }
+}
+
+struct node *make_node(int val){
+     struct node *nd;
+     nd = (struct node *)calloc(1, sizeof(struct node));
+     nd->x = val;
+     nd->next = NULL ;
+     return nd;
+    
+}
+
+struct node *insert_front(int val , struct node*head){
+    struct node *newnode= make_node(val);
+    newnode->next = head;
+    head = newnode;
+    return head;
+}
+
+
+
+
+int main() {
+    struct node* head = NULL ;
+    int x ;
+    cin >> x;
+    while (x >=0){
+        head =  insert_front(x , head);
+        cin >> x ;
+    }
+    display(head);
+   return 0;
+}
