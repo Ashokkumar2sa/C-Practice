@@ -1,0 +1,44 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+        long long int r[4];
+        for(int i=0 ;i<4;i++)    cin >> r[i] ;
+        
+        if((r[0]>1) && (r[1]>1) && (r[2]>1)){
+            int f[4]={0,0,0,0};
+            if((r[0]%2)==1) f[0]=1;
+            if((r[1]%2)==1) f[1]=1;
+            if((r[2]%2)==1) f[2]=1;
+            if((r[3]%2)==1) f[3]=1;
+            int n=0 , m=0;
+            for(int i =0 ;i<4;i++){
+                if(f[i]==0) n++;
+                else m++;
+            }
+            if(n==m) cout << "NO" << endl;
+            else cout << "YES" << endl; 
+        }
+        else{
+        int odd=0  ;
+        for(int i=0;i<3;i++){
+            
+            if(r[i]==1) odd++;
+        }
+        
+        if((odd == 3)||(odd==0)) cout << "YES" << endl;
+        
+        else if(odd==2) cout << "NO" <<endl;
+        else if(odd == 1){
+            if(r[3]>1) cout << "YES" << endl;
+            else if(r[3]==0) cout << "YES" << endl;
+            else cout << "NO" <<endl;
+        }
+        }
+    }
+    return 0;
+}
