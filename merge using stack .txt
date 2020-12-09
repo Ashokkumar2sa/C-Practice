@@ -1,0 +1,161 @@
+
+
+#include <iostream>
+using namespace std;
+
+int marker = -1;
+
+
+
+
+int stack[20000];
+
+int isfull(){
+    if(marker == 19999 ) return 1;
+    else return 0;
+}
+
+int isempty(){
+    if(marker == -1) return 1;
+    else return 0;
+}
+int  top(){
+    if(isempty()){
+        
+        return 0;
+    }
+    else {
+     int  y;
+     
+    y =  stack[marker];
+     return y;
+    }
+}
+
+void  push(int n){
+    if(isfull()){
+       
+        return ;
+    }
+    else {
+        marker++;//marker is increased and new value is added at the increased position
+        stack[marker]=n;
+        
+        
+        return ;
+    }
+    
+}
+
+int pop(){
+    if(isempty()){
+       
+        return 0 ;
+    }
+    else {
+     
+     int y;
+     
+    y = stack[marker];
+     
+     marker--;
+     
+        return y ;
+    }
+    
+}
+
+void merge(int arr[], int l, int r) 
+{ 
+    int i, j, k; 
+    int m = l + (r-l)/2;
+    int n1 = m - l + 1; 
+    int n2 = r - m; 
+  
+   
+    int L[n1], R[n2]; 
+  
+    
+    for (i = 0; i < n1; i++) 
+        L[i] = arr[l + i]; 
+    for (j = 0; j < n2; j++) 
+        R[j] = arr[m + 1 + j]; 
+  
+    i = 0; 
+    j = 0; 
+    k = l; 
+    while (i < n1 && j < n2) { 
+        if (L[i] <= R[j]) { 
+            arr[k] = L[i]; 
+            i++; 
+        } 
+        else { 
+            arr[k] = R[j]; 
+            j++; 
+        } 
+        k++; 
+    } 
+  
+   
+    while (i < n1) { 
+        arr[k] = L[i]; 
+        i++; 
+        k++; 
+    } 
+  
+   
+    while (j < n2) { 
+        arr[k] = R[j]; 
+        j++; 
+        k++; 
+    } 
+} 
+  
+
+void mergesort(int *a , int n){
+    
+    
+    push(0);push(0);push(n-1);
+    
+    
+    while(isempty() == 0){
+        int x,y,z;
+       x = pop();
+       y = pop();
+       z=pop();
+       if(z==1) merge(a , y , x);
+        
+        else if(y<x){
+           int mid = (x+y)/2;
+            push(1);            push(y);            push(x);     
+            push(0);            push(y);            push(mid);  
+            push(0);            push(mid+1);            push(x);
+        }
+        
+    
+    
+    
+    }
+    
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--)
+    {              
+        int n;
+        cin >> n;
+        int a[n];
+        for(int i=0;i<n;i++){
+            cin >> a[i];
+        }
+        
+        mergesort(a , n);
+        for(int i=0;i<n;i++){
+            cout << a[i] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
